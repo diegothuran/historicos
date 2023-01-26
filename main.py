@@ -2,10 +2,13 @@ from PyPDF2 import PdfWriter, PdfReader
 import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+import os
+
 
 packet = io.BytesIO()
 can = canvas.Canvas(packet, pagesize=letter)
 
+base_path = "historicos_base"
 filename = "Flavia"
 
 # Draw image on Canvas and save PDF in buffer
@@ -22,7 +25,7 @@ packet.seek(0)
 # create a new PDF with Reportlab
 new_pdf = PdfReader(packet)
 # read your existing PDF
-existing_pdf = PdfReader(open(f"{filename}.pdf", "rb"))
+existing_pdf = PdfReader(open(f"{os.path.join(base_path, filename)}.pdf", "rb"))
 output = PdfWriter()
 # add the "watermark" (which is the new pdf) on the existing page
 for num_page in range(0, len(existing_pdf.pages)):
