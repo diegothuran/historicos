@@ -6,9 +6,14 @@ from reportlab.lib.pagesizes import letter
 packet = io.BytesIO()
 can = canvas.Canvas(packet, pagesize=letter)
 
+filename = "Flavia"
+
 # Draw image on Canvas and save PDF in buffer
 imgPath = "Images/header.png"
-can.drawImage(imgPath, 70, 680, 500, 100)    ## at (399,760) with size 160x160
+can.drawImage(imgPath, 70, 670, 470, 100)    ## at (399,760) with size 160x160
+
+compImg = "Images/complementares.png"
+can.drawImage(compImg, 74, 390, 473, 200)
 can.save()
 
 #move to the beginning of the StringIO buffer
@@ -17,7 +22,7 @@ packet.seek(0)
 # create a new PDF with Reportlab
 new_pdf = PdfReader(packet)
 # read your existing PDF
-existing_pdf = PdfReader(open("HistóricoEscolar.pdf", "rb"))
+existing_pdf = PdfReader(open(f"{filename}.pdf", "rb"))
 output = PdfWriter()
 # add the "watermark" (which is the new pdf) on the existing page
 for num_page in range(0, len(existing_pdf.pages)):
@@ -30,6 +35,6 @@ for num_page in range(0, len(existing_pdf.pages)):
 # output.add_page(page)
 
 # finally, write "output" to a real file
-output_stream = open("destination.pdf", "wb")
+output_stream = open(f"{filename}_new.pdf", "wb")
 output.write(output_stream)
 output_stream.close()
