@@ -9,15 +9,14 @@ packet = io.BytesIO()
 can = canvas.Canvas(packet, pagesize=A4)
 
 base_path = "historicos_base"
-
-filename = "mayara_luana"
+filename = "rafael_gomes"
 
 # Draw image on Canvas and save PDF in buffer
 imgPath = "Images/header.png"
-can.drawImage(imgPath, 70, 670, 470, 100)    ## at (399,760) with size 160x160
+can.drawImage(imgPath, 70, 665, 470, 100)    ## at (399,760) with size 160x160
 
 compImg = "Images/complementares.png"
-can.drawImage(compImg, 74, 390, 473, 200)
+can.drawImage(compImg, 74, 370, 473, 200)
 can.save()
 
 #move to the beginning of the StringIO buffer
